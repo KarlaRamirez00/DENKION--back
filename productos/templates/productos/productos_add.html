@@ -9,6 +9,22 @@
     <link href="{% static 'administrador/css/style.css' %}" rel="stylesheet">
 </head>
 <body>
+   <!--Barra de navegaciÃ³n-->
+   <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="{% url 'index' %}">
+      <img src="{% static 'administrador/img/Denki_logo60h206w.png' %}" alt="Logo" width="206" height="60" class="d-inline-block align-top">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+         <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="{% url 'crud_productos' %}">Productos</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'crud_clientes' %}">Clientes</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'crud_boletas' %}">Boletas</a></li>            
+         </ul>
+      </div>
+   </nav>
    <div class="container mt-4">
       <h1>Formulario Agregar Productos</h1>
       <br>
@@ -26,6 +42,14 @@
       <br>
       <a href="{% url 'crud_productos' %}">Volver</a>
    </div>
+   <!--        Footer       -->
+  <footer class="footer mt-auto py-3 footer-text">
+   <div class="container d-flex justify-content-center align-items-center">
+     <div class="mr-3">
+       <h5 class="mx-auto">Página del Administrador</h5>
+     </div>      
+   </div>
+ </footer>
 
    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>

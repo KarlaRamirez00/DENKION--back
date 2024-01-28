@@ -12,30 +12,41 @@ def crud_clientes(request):
 # Función para Agregar Clientes
 def clientes_ag(request):
     if request.method == 'POST':
-        # Crear una instancia del formulario con los datos del request
         form = ClienteForm(request.POST)
 
-        # Verificar si el formulario es válido
         if form.is_valid():
-            # Guardar el objeto Cliente en la base de datos
             cliente = form.save(commit=False)
 
-            # Crear el usuario
+            # Verifica que todos los campos requeridos están presentes
+            required_fields = ['apellido_paterno', 'apellido_materno', 'fec_nac', 'comuna']
+            for field in required_fields:
+                if not getattr(cliente, field):
+                    return render(request, 'clientes/clientes_add.html', {'form': form, 'error': f'El campo {field} es obligatorio'})
+
+            # Verifica que el correo electrónico sea único
+            if User.objects.filter(email=cliente.correo).exists():
+                return render(request, 'clientes/clientes_add.html', {'form': form, 'error': 'El correo electrónico ya está en uso'})
+
+            # Verifica que la contraseña tenga al menos 8 caracteres
+            if len(cliente.contrasena) < 8:
+                return render(request, 'clientes/clientes_add.html', {'form': form, 'error': 'La contraseña debe tener al menos 8 caracteres'})
+
             user = User.objects.create_user(username=cliente.correo, email=cliente.correo, password=cliente.contrasena)
             user.save()
 
-            # Asignar el usuario al cliente
             cliente.usuario = user
             cliente.save()
 
-            return redirect('crud_clientes')  # Redirigir a la lista de clientes
-
+            return redirect('crud_clientes')
+        else:
+            print("Formulario no válido:", form.errors)
     else:
-        # Si es una solicitud GET, simplemente mostrar el formulario en blanco
         form = ClienteForm()
 
     context = {'form': form}
     return render(request, 'clientes/clientes_add.html', context)
+
+
   
     
 # Función para Eliminar Clientes
@@ -59,7 +70,8 @@ def clientes_del(request, pk):
         clientes=Cliente.objects.all()
         mensaje="Lo sentimos! No existe tal cliente"
         context={'mensaje':mensaje, 'clientes':clientes}
-        return render (request, "clientes/clientes_list.html", context)
+        return render (request, "clientes/clientes_list.html", context)    
+
     
 # Función1 para Editar Clientes
 def clientes_edit(request, pk):

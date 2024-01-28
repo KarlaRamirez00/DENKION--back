@@ -3,12 +3,11 @@ from productos.models import Producto
 from .forms import ProductoForm
 
 # Función para Listar Productos
-
-
 def crud_productos(request):
     productos = Producto.objects.all()
     context = {'productos': productos}
     return render(request, "productos/productos_list.html", context)
+
 
 # Función para Agregar Productos
 def productos_ag(request):

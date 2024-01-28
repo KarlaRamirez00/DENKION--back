@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes Existentes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="{% static 'administrador/css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+
+    <!--Barra de navegación-->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="{% url 'index' %}">
+        <img src="{% static 'administrador/img/Denki_logo60h206w.png' %}" alt="Logo" width="206" height="60" class="d-inline-block align-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'crud_productos' %}">Productos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'crud_clientes' %}">Clientes</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'crud_boletas' %}">Boletas</a></li>            
+            </ul>
+        </div>
+    </nav>
+    <!--FIN Barra de navegación-->  
+
+    <div class="container mt-4">
+        <h1 class="titulo text-center">Lista de Clientes</h1>
+        <br>        
+        <div id="idMensajes">
+            {% if mensaje %}
+                {{mensaje}}
+            {% endif %}
+         </div>
+        <br>
+
+    <!--Tabla con Listado de Clientes registrados-->
+    <table class="table table-striped">
+        <thead class="thead-dark">            
+            <th>Rut</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Modificar</th>
+            <th>Eliminar</th>            
+        </thead>
+        {% for x in clientes %}
+            <tr>
+                <td>{{ x.rut }}</td>
+                <td>{{ x.nombre }}</td>
+                <td>{{ x.apellido }}</td>
+                <td>{{ x.correo }}</td>
+                <td><a href="{% url 'clientes_edit' pk=x.rut %}">Modificar</a></td>
+                <td><a href="{% url 'clientes_del' pk=x.rut %}">Eliminar</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <!--FIN Tabla con Listado de Clientes registrados-->
+    <br>
+
+    <!--Botón agregar-->
+    <div class="text-center">
+    <button type="button" class="btn btn-info btn-lg">
+        <a href="{% url 'clientes_add' %}" style="color: aliceblue; font-weight: bold;">Agregar</a>
+    </button>
+    </div>
+    <!--FIN Botón agregar-->      
+
+    <!--Footer-->
+    <footer class="footer mt-auto py-3 footer-text">
+        <div class="container d-flex justify-content-center align-items-center">
+        <div class="mr-3">
+            <h5 class="mx-auto">Página del Administrador</h5>
+        </div>      
+        </div>
+    </footer>
+    <!--FIN Footer-->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#idMensajes").delay(2000).fadeOut("slow");
+        });
+    </script>
+    
+</body>
+</html>
