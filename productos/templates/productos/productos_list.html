@@ -12,7 +12,7 @@
 
 <!--Barra de navegaciÃ³n-->
 <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="index.html">
+    <a class="navbar-brand" href="{% url 'index' %}">
       <img src="{% static 'administrador/img/Denki_logo60h206w.png' %}" alt="Logo" width="206" height="60" class="d-inline-block align-top">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,15 +20,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="productos_list.html">Productos</a></li>
-            <li class="nav-item"><a class="nav-link" href="clientes_list.html">Clientes</a></li>
-            <li class="nav-item"><a class="nav-link" href="boletas.html">Boletas</a></li>
-            <li class="nav-item">
-              
-            </li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'crud_productos' %}">Productos</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'crud_clientes' %}">Clientes</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'crud_boletas' %}">Boletas</a></li>            
         </ul>
     </div>
 </nav>
+
 <div class="container mt-4">
     <h1 class="titulo text-center">Lista de Productos</h1>
     <br>
