@@ -1,0 +1,173 @@
+/*imagen provisoria pag carrito*/
+.imgiso{
+    position: absolute;
+    bottom: 23%;
+    left: 50%;
+    transform: translate(-50%);
+    max-width: 50vh; /* Ajusta según sea necesario */
+    max-height: 50vh; /* Ajusta según sea necesario */
+}
+
+.navbar{
+    border-bottom: 2px solid rgb(196, 196, 196);
+    background-color: #ffffff;
+    padding: 0em -1;
+}
+/*Texto Opciones Navbar*/
+.nav-link{
+    color: rgb(243, 243, 243);
+    font-weight: bolder;
+}
+/* Imagenes de fondo pag inicio */
+.tamanoimgf {
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: -6em; /* Ajusta el valor según sea necesario para eliminar el espacio en blanco */
+}
+
+
+/*Frase "Para los amantes del sonido"*/
+.textoimg{
+    position:absolute;
+    top: 40%;
+    left: 5%;
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    font-weight: bolder;
+    font-style: italic;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: -3px;
+    text-shadow: 1px 1px 2px rgb(0, 0, 0);
+}
+
+/* Barra Azul Footer  */
+.footer {
+    background-color: #1b3248;
+    position:fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1em 0; /* Ajusta el padding según sea necesario */
+    color: #ffffff;
+    text-align: center;
+    z-index: 998; /* Permite ajustar el orden de las capas de los objetos. */
+}
+
+/* Texto e Iconos RRSS del Footer */
+.footerText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+/* Frase "¿No tienes una cuenta? Registrar" */
+.pa_reg{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    color:rgb(0, 42, 255);
+} 
+
+.titulo{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #1b3248;
+}
+ 
+.nosotros-container {
+    display: flex;
+    align-items: center;
+    
+    margin-top: 20px; /* Ajusta según sea necesario */
+    margin-bottom: 20px; /* Ajusta según sea necesario */
+}
+
+.nosotros-carousel {
+    width: 50%; /* Ajusta el ancho del carrusel según sea necesario */
+}
+
+.nosotros-text {
+    width: 45%; /* Ajusta el ancho del texto según sea necesario */
+}
+.texto-container {
+    color: #592b02; /* Color del texto blanco */
+    padding-left: 30%; /* Espaciado interno del contenedor */
+    border-radius: 4px; /* Bordes redondeados para el contenedor */
+}
+.nosotros-text p {
+    text-align: justify;
+}
+
+body{
+    margin: 0;
+    position: relative;
+    padding-bottom: 6em;
+    min-height: 100vh;
+}
+
+/* Estilos de las tarjetas (cards) */
+.card {
+    background-color: #fff;
+    border: 5.5px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.4s;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.463);
+  }
+
+  .card img {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .card-text {
+    font-size: 14px;
+    margin-bottom: 10px;
+    }
+
+    .lineasub{
+        border-bottom: 2px solid rgb(196, 196, 196);
+    }
+
+
+/* PopUp Whatsapp */
+.container-wsp{
+    background: #0df053;
+    color: #fff;
+    position: fixed;
+    z-index: 999;
+    border-radius: 50%;
+    bottom: 20px;
+    right: 20px;
+    padding: 20px;
+    transition: ease 0.3s;
+    border: 1px solid darkgray;
+    animation: efecto 1.2s infinite;
+}
+
+.container-wsp:hover{
+    transform: scale(1.1);
+    transition: ease 0.3s;
+}
+
+.boton{
+    width: 10px;
+}
+
+@keyframes efecto{
+    0%{
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    }
+    100%{
+        box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+    }
+}
