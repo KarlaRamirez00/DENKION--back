@@ -1,6 +1,4 @@
 from django.shortcuts import render, redirect
-from clientes.models import Cliente
-from productos.models import Producto 
 from boletas.models import Boleta
 from .forms import BoletaForm
 
@@ -25,8 +23,6 @@ def boletas_ag(request):
 
     return render(request, 'boletas_add.html', {'form': form})
 
-
-
 # Función para Eliminar Boletas
 def boletas_del(request, pk):
     mensajes=[]
@@ -49,11 +45,8 @@ def boletas_del(request, pk):
         mensaje="Lo sentimos! No existe tal boleta"
         context={'mensaje':mensaje, 'boletas':boletas}
         return render (request, "boletas/boletas_list.html", context)
-    
 
-
-from .forms import BoletaForm
-
+# Función 1 para Editar Boletas
 def boletas_edit(request, pk):
     try:
         boleta = Boleta.objects.get(id_boleta=pk)
@@ -66,7 +59,7 @@ def boletas_edit(request, pk):
     context = {'form': form, 'boleta': boleta}
     return render(request, "boletas/boletas_edit.html", context)
 
-
+# Función 1 para Editar Boletas
 def boletasUpdate(request, pk):
     try:
         boleta = Boleta.objects.get(id_boleta=pk)
@@ -78,11 +71,9 @@ def boletasUpdate(request, pk):
         form = BoletaForm(request.POST, instance=boleta)
         if form.is_valid():
             form.save()
-            context = {'mensaje': "Perfecto! Datos actualizados exitosamente", 'boleta': boleta}
-            return render(request, "boletas/boletas_list.html", context)
+            return redirect('boletas_edit', pk=pk)
     else:
         form = BoletaForm(instance=boleta)
 
     context = {'form': form, 'boleta': boleta}
     return render(request, "boletas/boletas_edit.html", context)
-

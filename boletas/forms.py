@@ -19,6 +19,7 @@ class BoletaForm(forms.ModelForm):
         self.fields['cliente'].queryset = Cliente.objects.all()
         self.fields['cliente'].label_from_instance = lambda obj: f"{obj.nombre} {obj.apellido_paterno}"
 
-        # Campo de producto como un ModelChoiceField con productos del cliente seleccionado
+        # Campo de producto como un Select con todos los productos
         self.fields['producto'].widget = forms.Select(attrs={'class': 'form-control'})
-        self.fields['producto'].queryset = Producto.objects.filter(cliente=self.instance.cliente)
+        self.fields['producto'].queryset = Producto.objects.all()
+
