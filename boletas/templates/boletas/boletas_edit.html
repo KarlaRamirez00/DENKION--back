@@ -9,7 +9,7 @@
     <link href="{% static 'administrador/css/style.css' %}" rel="stylesheet">
 </head>
 <body>
-    <!--Barra de navegaciÃ³n-->
+    <!--Barra de navegación-->
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="{% url 'index' %}">
         <img src="{% static 'administrador/img/Denki_logo60h206w.png' %}" alt="Logo" width="206" height="60" class="d-inline-block align-top">
@@ -25,22 +25,41 @@
             </ul>
         </div>
     </nav>
+    <!--FIN Barra de navegación-->
     <div class="container mt-4">
-        {% if producto %}    
+        {% if boleta %}
+        
             <h1>Modificar Boleta</h1>
             <br>
 
-            <form action="{% url 'boletasUpdate' %}" method="POST">
+            <form action="{% url 'boletasUpdate' pk=boleta.id_boleta %}" method="POST">
                 {% csrf_token %}
-
-                <pre>Fecha: <input type="text" name="fecha" value="{{boleta.fecha}}"></pre>
-                <pre>Cliente: <input type="text" name="cliente" value="{{boleta.cliente}}"></pre>
-                <pre>Nombre: <input type="text" name="nombre" value="{{boleta.nombre}}"></pre>
-                <pre>Producto: <input type="text" name="producto" value="{{boleta.producto}}"></pre>
-                <pre>Total: <input type="text" name="total" value="{{boleta.total}}"></pre>
-                <pre>Metodo de Pago: <input type="text" name="metodo_pago" value="{{boleta.metodo_pago}}"></pre>
-                <pre>Estado: <input type="text" name="estado" value="{{boleta.estado}}"></pre>
-                <input type="submit" name="opcion" value="Actualizar">
+            
+                <div class="form-group">
+                    <label for="{{ form.fecha.id_for_label }}">Fecha:</label>
+                    {{ form.fecha }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.cliente.id_for_label }}">Cliente:</label>
+                    {{ form.cliente }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.producto.id_for_label }}">Producto:</label>
+                    {{ form.producto }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.total.id_for_label }}">Total:</label>
+                    {{ form.total }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.metodo_pago.id_for_label }}">Metodo de Pago:</label>
+                    {{ form.metodo_pago }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.estado.id_for_label }}">Estado:</label>
+                    {{ form.estado }}
+                </div>
+                <input type="submit" name="opcion" value="Actualizar" class="btn btn-primary">
             </form>
             <br>
         {% endif %}

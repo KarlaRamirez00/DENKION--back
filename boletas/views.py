@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from clientes.models import Cliente
+from productos.models import Producto 
 from boletas.models import Boleta
 from .forms import BoletaForm
 
@@ -48,46 +50,39 @@ def boletas_del(request, pk):
         context={'mensaje':mensaje, 'boletas':boletas}
         return render (request, "boletas/boletas_list.html", context)
     
-# Función1 para Editar Boletas
+
+
+from .forms import BoletaForm
+
 def boletas_edit(request, pk):
-    if pk != "":
-        boleta=Boleta.objects.get(id_boleta=pk)
-        context={'boleta':boleta}
-        if boleta:
-            return render(request, "boletas/boletas_edit.html", context)
-        else:
-            context={'mensaje':"Lo lamentamos, no existe tal boleta."}
-            return render(request, "boletas/boletas_list.html", context)
-    else:
-        context={}
+    try:
+        boleta = Boleta.objects.get(id_boleta=pk)
+    except Boleta.DoesNotExist:
+        context = {'mensaje': "Lo lamentamos, no existe tal boleta."}
         return render(request, "boletas/boletas_list.html", context)
-    
-# Función2 para Editar Boletas   
+
+    form = BoletaForm(instance=boleta)  # Crea una instancia del formulario con la boleta como instancia
+
+    context = {'form': form, 'boleta': boleta}
+    return render(request, "boletas/boletas_edit.html", context)
+
+
 def boletasUpdate(request, pk):
-    boleta = Boleta.objects.get(id_boleta=pk)  # Obtener la instancia existente
+    try:
+        boleta = Boleta.objects.get(id_boleta=pk)
+    except Boleta.DoesNotExist:
+        context = {'mensaje': "Lo lamentamos, no existe tal boleta."}
+        return render(request, "boletas/boletas_list.html", context)
 
     if request.method == "POST":
-        fecha = request.POST["fecha"]
-        cliente = request.POST["cliente"]
-        nombre = request.POST["nombre"]
-        producto = request.POST["producto"]
-        total = request.POST["total"]
-        metodo_pago = request.POST["metodo_pago"]
-        estado = request.POST["estado"]
-
-        # Actualizar los campos de la instancia existente
-        boleta.fecha = fecha
-        boleta.cliente = cliente
-        boleta.nombre = nombre
-        boleta.producto = producto
-        boleta.estado = estado
-        boleta.total = total
-        boleta.metodo_pago = metodo_pago
-
-        boleta.save()
-
-        context = {'mensaje': "Perfecto! Datos actualizados exitosamente", 'boleta': boleta}
-        return render(request, "boletas/boletas_list.html", context)
+        form = BoletaForm(request.POST, instance=boleta)
+        if form.is_valid():
+            form.save()
+            context = {'mensaje': "Perfecto! Datos actualizados exitosamente", 'boleta': boleta}
+            return render(request, "boletas/boletas_list.html", context)
     else:
-        context = {}
-        return render(request, "boletas/boletas_list.html", context)
+        form = BoletaForm(instance=boleta)
+
+    context = {'form': form, 'boleta': boleta}
+    return render(request, "boletas/boletas_edit.html", context)
+

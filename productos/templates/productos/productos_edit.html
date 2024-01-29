@@ -29,8 +29,7 @@
         {% if producto %}    
             <h1>Modificar producto</h1>
             <br>
-
-            <form action="{% url 'productosUpdate' %}" method="POST">
+            <form action="{% url 'productosUpdate' pk=producto.id_producto %}" method="POST">
                 {% csrf_token %}
 
                 <pre>Modelo: <input type="text" name="modelo" value="{{producto.modelo}}"></pre>

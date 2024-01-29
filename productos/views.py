@@ -66,29 +66,34 @@ def productos_edit(request, pk):
         context={}
         return render(request, "productos/productos_list.html", context)
     
-# Función2 para Editar Productos   
-def productosUpdate(request):
+
+# Función2 para Editar Productos 
+def productosUpdate(request, pk):
+    errores = []  # Inicializa la variable
+
+    try:
+        producto = Producto.objects.get(id_producto=pk)
+    except Producto.DoesNotExist:
+        errores.append("Lo lamentamos, no existe tal producto.")
+        productos = Producto.objects.all()
+        context = {'productos': productos, 'errores': errores}
+        return render(request, "productos/productos_list.html", context)
+
     if request.method == "POST":
-        modelo=request.POST["modelo"]
-        marca=request.POST["marca"]
-        anno_fab=request.POST["anno_fab"]
-        precio=request.POST["precio"]
-        stock=request.POST["stock"]
-        estado=request.POST["estado"]
-        categoria=request.POST["categoria"]
-        desc=request.POST["desc"]
-        producto = Producto()
-        producto.modelo=modelo
-        producto.marca=marca
-        producto.anno_fab=anno_fab
-        producto.precio=precio
-        producto.stock=stock
-        producto.estado=estado
-        producto.categoria=categoria
-        producto.desc=desc
-        producto.save()
-        context={'mensaje':"Perfecto! Datos actualizados exitosamente", 'producto':producto}
-        return render(request, "productos/productos_list.html", context)
+        form = ProductoForm(request.POST, instance=producto)
+
+        if form.is_valid():
+            form.save()
+            mensajes = ["Perfecto! Datos actualizados exitosamente"]
+            productos = Producto.objects.all()
+            context = {'productos': productos, 'mensajes': mensajes}
+            return render(request, "productos/productos_list.html", context)
+        else:
+            errores.append("Error en el formulario")
     else:
-        context = {}
-        return render(request, "productos/productos_list.html", context)
+        errores.append("Error en la solicitud POST")
+
+    # Asegúrate de que la variable 'productos' está definida antes de usarla en el contexto.
+    productos = Producto.objects.all()
+    context = {'productos': productos, 'errores': errores}
+    return render(request, "productos/productos_list.html", context)
