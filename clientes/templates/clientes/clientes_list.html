@@ -52,7 +52,7 @@
             <tr>
                 <td>{{ x.rut }}</td>
                 <td>{{ x.nombre }}</td>
-                <td>{{ x.apellido }}</td>
+                <td>{{ x.apellido_paterno }}</td>
                 <td>{{ x.correo }}</td>
                 <td><a href="{% url 'clientes_edit' pk=x.rut %}">Modificar</a></td>
                 <td><a href="{% url 'clientes_del' pk=x.rut %}">Eliminar</a></td>
@@ -61,6 +61,13 @@
     </table>
     <!--FIN Tabla con Listado de Clientes registrados-->
     <br>
+
+    <td>{{ cliente.rut }}</td>
+    <td>{{ cliente.nombre }}</td>
+    <td>{{ cliente.apellido }}</td> <!-- Asegúrate de incluir esta línea para mostrar el apellido -->
+    <td>{{ cliente.correo }}</td>
+
+
 
     <!--Botón agregar-->
     <div class="text-center">

@@ -25,13 +25,18 @@
          </ul>
       </div>
    </nav>
+   <!--FIN Barra de navegación-->
+
+   
    <div class="container mt-4">
       <h1>Formulario Agregar Boletas</h1>
       <br>
-      <form action="" method = "POST">
+      <form method="post">
          {% csrf_token %}
-         {{ form.as_ul}}
+         {{ form.as_ul }}
          <input type="submit" value="Agregar">
+     </form>
+     
       </form>
       <br>
       <div id="idMensajes">

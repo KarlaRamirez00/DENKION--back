@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from boletas.models import Boleta
 from .forms import BoletaForm
 
@@ -10,24 +10,21 @@ def crud_boletas(request):
 
 # Función para Agregar Boletas
 def boletas_ag(request):
-    context={}
-
-    if request.method == "POST":
+    if request.method == 'POST':
         form = BoletaForm(request.POST)
+        print(request.POST)  # Agrega esta línea para imprimir el contenido de request.POST
         if form.is_valid():
-            print ("estoy en si es válido")
             form.save()
-
-            #limpiar form
-            form = BoletaForm()
-
-            context={'mensaje':"Perfecto! La boleta ha sido guardada correctamente", "form":form}
-            return render(request, "boletas/boletas_add.html", context)
+            return redirect('crud_boletas')
+        else:
+            print(form.errors)  # Agrega esta línea para imprimir los errores del formulario
     else:
         form = BoletaForm()
-        context = {'form':form}
-        return render (request, "boletas/boletas_add.html", context)
-    
+
+    return render(request, 'boletas_add.html', {'form': form})
+
+
+
 # Función para Eliminar Boletas
 def boletas_del(request, pk):
     mensajes=[]

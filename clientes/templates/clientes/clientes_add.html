@@ -31,94 +31,19 @@
     <div class="container mt-4">
         <h2 class="titulo">Registrar usuario</h2>
         <br>
+
         <form id="validado" method="post" action="{% url 'clientes_add' %}">
             {% csrf_token %}
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputName">Nombre</label>
-                    <input type="text" class="form-control" id="inputName1" name="nombre">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputLastName">Apellido</label>
-                    <input type="text" class="form-control" id="inputLastName1" name="apellido">
-                </div>     
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-8">
-                    <label for="inputRut">Rut</label>
-                    <input type="number" class="form-control" id="inputRut1" name="rut">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="inputDv">D&iacute;gito verificador</label>
-                    <input type="text" class="form-control" id="inputDv1" name="dv">
-                </div>     
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputDireccion">Direcci&oacute;n</label>
-                    <input type="text" class="form-control" id="inputDireccion1" name="direccion" >
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="inputCiudad">Ciudad</label>
-                    <input type="text" class="form-control" id="inputCiudad1" name="ciudad">
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="InputRegion">Regi&oacute;n</label>
-                    <select id="inputRegion1" class="form-control" name="region">
-                        <option selected>XV.Arica y Parinacota</option>
-                        <option selected>I.Tarapac&aacute;</option>
-                        <option selected>II.Antofagasta</option>
-                        <option selected>III.Atacama</option>
-                        <option selected>IV.Coquimbo</option>
-                        <option selected>V.Valpara&iacute;so</option>
-                        <option selected>VI.Bernardo Ohiggin's</option>
-                        <option selected>VII.Maule</option>
-                        <option selected>VIII.B&iacute;o-B&iacute;o</option>
-                        <option selected>IX.Araucan&iacute;a</option>
-                        <option selected>XIV.De los R&iacute;os</option>
-                        <option selected>X.De los Lagos</option>
-                        <option selected>XI.Ays&eacute;n</option>
-                        <option selected>XII.Magallanes y la Ant&aacute;rtida</option>
-                        <option selected>XIII.Metropolitana</option>
-                        <option selected>Seleccione...</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail2">Correo electr&oacute;nico</label>
-                    <input type="email" class="form-control" id="inputEmail2" aria-describedby="emailHelp" name="correo">
-                </div>
-
-                <div class="form-group col-md-6 mx-auto">
-                    <label for="inputTelefono1">Tel&eacute;fono</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">+56 9</span>
-                        </div>
-                        <input type="tel" class="form-control" id="inputTelefono1" name="telefono">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputPassword">Contrase&ntilde;a</label>
-                    <input type="password" class="form-control" id="inputPassword1" name="contrasena">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputPassword">Repetir contrase&ntilde;a</label>
-                    <input type="password" class="form-control" id="inputPassword2" name="contrasena">
-                </div>
-            </div>
-            <br>
+            {{ form.as_p }}
             <button type="submit" class="btn btn-primary">Registrar</button>
         </form>
+        
         <br><br>
     </div>
     <br>
-    <a href="{% url 'crud_clientes' %}">Volver</a>
+    <div class="text-center mt-3">
+        <a href="{% url 'crud_clientes' %}" class="btn btn-secondary">Volver</a>
+    </div>
     <!-- Footer -->
     <footer class="footer mt-auto py-3 footer-text">
         <div class="container d-flex justify-content-center align-items-center">

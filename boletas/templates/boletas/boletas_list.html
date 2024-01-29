@@ -29,26 +29,33 @@
 <div class="container mt-4">
     <h1 class="titulo">Lista de Boletas</h1>
     <br>
-    <button type="button">
-        <a href="{% url 'boletas_add' %}">Agregar</a>
-    </button>
+    
     <div id="idMensajes">
         {% if mensaje %}
             {{mensaje}}
         {% endif %}
     </div>
     <br>
-    <table>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
         {% if boletas %}
             <th>Boleta</th>
             <th>Fecha</th>
+            <th>Rut</th>
+            <th>Nombre</th>
+            <th>Producto</th>
             <th>Total</th>
             <th>Modificar</th>
             <th>Eliminar</th>
+        </thead>
             {% for x in boletas %}
                 <tr>
                     <td>{{ x.id_boleta }}</td>
                     <td>{{ x.fecha }}</td>
+                    <td>{{ x.cliente.rut }}</td>
+                    <td>{{ x.cliente.nombre }}</td> 
+                    <td>{{ x.producto.id_producto }}</td> 
                     <td>{{ x.total }}</td>
                     <td><a href="{% url 'boletas_edit' pk=x.id_boleta %}">Modificar</a></td>
                     <td><a href="{% url 'boletas_del' pk=x.id_boleta %}">Eliminar</a></td>
@@ -56,6 +63,14 @@
             {% endfor %}
         {% endif %}
     </table>
+    <br>
+    <!--Botón agregar-->
+    <div class="text-center">
+        <button type="button" class="btn btn-info btn-lg">
+            <a href="{% url 'boletas_add' %}" style="color: aliceblue; font-weight: bold;">Agregar</a>
+        </button>
+    </div>
+    <!--FIN Botón agregar--> 
 </div>
 <!--        Footer       -->
 <footer class="footer mt-auto py-3 footer-text">

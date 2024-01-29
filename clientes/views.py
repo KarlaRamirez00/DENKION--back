@@ -13,40 +13,16 @@ def crud_clientes(request):
 def clientes_ag(request):
     if request.method == 'POST':
         form = ClienteForm(request.POST)
-
         if form.is_valid():
-            cliente = form.save(commit=False)
-
-            # Verifica que todos los campos requeridos están presentes
-            required_fields = ['apellido_paterno', 'apellido_materno', 'fec_nac', 'comuna']
-            for field in required_fields:
-                if not getattr(cliente, field):
-                    return render(request, 'clientes/clientes_add.html', {'form': form, 'error': f'El campo {field} es obligatorio'})
-
-            # Verifica que el correo electrónico sea único
-            if User.objects.filter(email=cliente.correo).exists():
-                return render(request, 'clientes/clientes_add.html', {'form': form, 'error': 'El correo electrónico ya está en uso'})
-
-            # Verifica que la contraseña tenga al menos 8 caracteres
-            if len(cliente.contrasena) < 8:
-                return render(request, 'clientes/clientes_add.html', {'form': form, 'error': 'La contraseña debe tener al menos 8 caracteres'})
-
-            user = User.objects.create_user(username=cliente.correo, email=cliente.correo, password=cliente.contrasena)
-            user.save()
-
-            cliente.usuario = user
-            cliente.save()
-
+            # Si el formulario es válido, crea el cliente
+            form.save()
+            # Redirige a la página de lista de clientes o a donde desees
             return redirect('crud_clientes')
-        else:
-            print("Formulario no válido:", form.errors)
     else:
+        # Si es una solicitud GET, simplemente renderiza el formulario
         form = ClienteForm()
 
-    context = {'form': form}
-    return render(request, 'clientes/clientes_add.html', context)
-
-
+    return render(request, 'clientes/clientes_add.html', {'form': form})
   
     
 # Función para Eliminar Clientes
