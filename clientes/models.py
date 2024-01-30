@@ -1,5 +1,4 @@
 from django.db import models
-from productos.models import Producto #OJO, esto es importante, y me había olvidado ponerlo
 
 # Create your models here.
 
@@ -17,8 +16,6 @@ class Cliente(models.Model):
     region            = models.CharField(max_length=60, blank=False, null=False)
     correo            = models.EmailField(unique=True, max_length=50, blank=True, null=True)
     contrasena        = models.CharField(max_length=15, blank=False, null=False)
-    id_producto       = models.ForeignKey('productos.Producto', on_delete=models.CASCADE, db_column='idProducto')
-
     
 def __str__(self):
         return str(self.rut)+" "+str(self.nombre)+" "+str(self.apellido_paterno)+" "+str(self.apellido_materno)

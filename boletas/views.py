@@ -12,16 +12,22 @@ def crud_boletas(request):
 def boletas_ag(request):
     if request.method == 'POST':
         form = BoletaForm(request.POST)
-        print(request.POST)  # Agrega esta línea para imprimir el contenido de request.POST
+        print(request.POST)  
         if form.is_valid():
             form.save()
-            return redirect('crud_boletas')
+            #limpiar formulario
+            form = BoletaForm()
+
+            context={'mensaje':"Perfecto! La boleta ha sido guardada correctamente", "form":form}
+            return render(request, "boletas/boletas_add.html", context)
+            
         else:
-            print(form.errors)  # Agrega esta línea para imprimir los errores del formulario
+            print(form.errors) 
     else:
         form = BoletaForm()
+        context = {'form':form}
+        return render (request, "boletas/boletas_add.html", context)
 
-    return render(request, 'boletas_add.html', {'form': form})
 
 # Función para Eliminar Boletas
 def boletas_del(request, pk):

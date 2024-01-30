@@ -26,12 +26,14 @@
         </div>
     </nav>
     <!--FIN Barra de navegación-->
+
     <div class="container mt-4">
         {% if boleta %}
         
             <h1>Modificar Boleta</h1>
             <br>
 
+            <!--Formulario para Editar boletas-->
             <form action="{% url 'boletasUpdate' pk=boleta.id_boleta %}" method="POST">
                 {% csrf_token %}
             
@@ -61,6 +63,7 @@
                 </div>
                 <input type="submit" name="opcion" value="Actualizar" class="btn btn-primary">
             </form>
+            <!--FIN Formulario para Editar boletas-->
             <br>
         {% endif %}
 
@@ -72,14 +75,16 @@
         <br>
         <a href="{%url 'crud_boletas' %}">Volver</a>
     </div>
-    <!--        Footer       -->
-  <footer class="footer mt-auto py-3 footer-text">
-    <div class="container d-flex justify-content-center align-items-center">
-      <div class="mr-3">
-        <h5 class="mx-auto">Página del Administrador</h5>
-      </div>      
-    </div>
-  </footer>
+
+    <!--Footer-->
+    <footer class="footer mt-auto py-3 footer-text">
+        <div class="container d-flex justify-content-center align-items-center">
+        <div class="mr-3">
+            <h5 class="mx-auto">Página del Administrador</h5>
+        </div>      
+        </div>
+    </footer>
+    <!--FIN Footer-->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>

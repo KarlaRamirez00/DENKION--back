@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Editar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="{% static 'administrador/css/style.css' %}" rel="stylesheet">
 </head>
 <body>
-    <!--Barra de navegaciÃ³n-->
+    <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="{% url 'index' %}">
         <img src="{% static 'administrador/img/Denki_logo60h206w.png' %}" alt="Logo" width="206" height="60" class="d-inline-block align-top">
@@ -23,22 +25,102 @@
             </ul>
         </div>
     </nav>
-      <!--        Footer       -->
+    <!-- FIN Barra de navegación -->
+
+    <div class="container mt-4">
+        {% if cliente %}
+        
+            <h1>Modificar Cliente</h1>
+            <br>
+
+            <!-- Formulario para Editar clientes -->
+            <form action="{% url 'clientesUpdate' pk=cliente.rut %}" method="POST">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="{{ form.rut.id_for_label }}">Rut:</label>
+                    {{ form.rut }}
+                </div>
+            
+                <div class="form-group">
+                    <label for="{{ form.dv.id_for_label }}">Dv:</label>
+                    {{ form.dv }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
+                    {{ form.nombre }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.apellido_paterno.id_for_label }}">Apellido Paterno:</label>
+                    {{ form.apellido_paterno }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.apellido_materno.id_for_label }}">Apellido Materno:</label>
+                    {{ form.apellido_materno }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.fec_nac.id_for_label }}">Fecha de Nacimiento:</label>
+                    {{ form.fec_nac }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.telefono.id_for_label }}">Teléfono:</label>
+                    {{ form.telefono }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.direccion.id_for_label }}">Dirección:</label>
+                    {{ form.direccion }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.comuna.id_for_label }}">Comuna:</label>
+                    {{ form.comuna }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.ciudad.id_for_label }}">Ciudad:</label>
+                    {{ form.ciudad }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.region.id_for_label }}">Region:</label>
+                    {{ form.region }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.correo.id_for_label }}">correo:</label>
+                    {{ form.correo }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.contrasena.id_for_label }}">Contraseña:</label>
+                    {{ form.contrasena }}
+                </div>
+                <input type="submit" name="opcion" value="Actualizar" class="btn btn-primary">
+            </form>
+            <!-- FIN Formulario para Editar clientes -->
+            <br>
+        {% endif %}
+
+        <div id="idMensajes">
+            {% if mensaje %}
+                {{ mensaje }}
+            {% endif %}
+        </div>
+        <br>
+        <a href="{% url 'crud_clientes' %}">Volver</a>
+    </div>                   
+
+    <!-- Footer -->
     <footer class="footer mt-auto py-3 footer-text">
         <div class="container d-flex justify-content-center align-items-center">
-        <div class="mr-3">
-            <h5 class="mx-auto">Página del Administrador</h5>
-        </div>      
+            <div class="mr-3">
+                <h5 class="mx-auto">Página del Administrador</h5>
+            </div>      
         </div>
     </footer>
+    <!-- FIN Footer -->
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $("#idMensajes").delay(2000).fadeOut("slow");
-        });
-    </script>
+
 </body>
 </html>
+
+               

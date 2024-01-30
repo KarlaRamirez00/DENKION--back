@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from clientes.models import Cliente
-from django.contrib.auth.models import User
 from .forms import ClienteForm
 
 # Función para Listar Clientes
@@ -52,19 +51,20 @@ def clientes_del(request, pk):
 # Función1 para Editar Clientes
 def clientes_edit(request, pk):
     if pk != "":
-        cliente=Cliente.objects.get(rut=pk)
-        context={'cliente':cliente}
+        cliente = Cliente.objects.get(rut=pk)
         if cliente:
+            form = ClienteForm(instance=cliente)
+            context = {'cliente': cliente, 'form': form}
             return render(request, "clientes/clientes_edit.html", context)
         else:
-            context={'mensaje':"Lo lamentamos, no existe tal cliente."}
+            context = {'mensaje': "Lo lamentamos, no existe tal cliente."}
             return render(request, "clientes/clientes_list.html", context)
     else:
-        context={}
+        context = {}
         return render(request, "clientes/clientes_list.html", context)
-    
+
 # Función2 para Editar Clientes   
-def clientesUpdate(request):
+def clientesUpdate(request, pk):
     if request.method == "POST":
         rut=request.POST["rut"]
         dv=request.POST["dv"]
@@ -78,10 +78,10 @@ def clientesUpdate(request):
         ciudad=request.POST["ciudad"]           
         region=request.POST["region"]           
         correo=request.POST["correo"]            
-        contrasena=request.POST["contrasena"]       
-        id_producto=request.POST["id_producto"] 
+        contrasena=request.POST["contrasena"]   
 
         cliente = Cliente()
+
         cliente.rut = rut
         cliente.dv = dv
         cliente.nombre = nombre
@@ -95,8 +95,9 @@ def clientesUpdate(request):
         cliente.region = region
         cliente.correo = correo
         cliente.contrasena = contrasena
-        cliente.id_producto = id_producto
+
         cliente.save()
+
         context={'mensaje':"Perfecto! Datos actualizados exitosamente", 'cliente':cliente}
         return render(request, "clientes/clientes_list.html", context)
     else:
